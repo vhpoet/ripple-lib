@@ -22,7 +22,7 @@ function inverse(number) {
 }
 
 function Amount() {
-  // Json format:
+  // Json format:h
   //  integer : XRP
   //  { 'value' : ..., 'currency' : ..., 'issuer' : ...}
 
@@ -231,6 +231,7 @@ Amount.prototype.ratio_human = function(denominator, opts) {
   //
   // To compensate, we multiply the numerator by 10^xns_precision.
   if (denominator._is_native) {
+    numerator = numerator.clone();
     numerator._set_value(numerator._value.times(Amount.bi_xns_unit));
   }
 
@@ -283,6 +284,7 @@ Amount.prototype.product_human = function(factor, opts) {
   //
   // See also Amount#ratio_human.
   if (factor._is_native) {
+    product = product.clone();
     product._set_value(product._value.dividedBy(Amount.bi_xns_unit));
   }
 
